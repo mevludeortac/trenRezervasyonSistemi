@@ -35,12 +35,12 @@ namespace trenRezervasyonSistemi.Controllers
                                         }
                                                     }                    
                      };
-                                 return Ok(response);
             }
             else
                 {
                 var yerlesimAyrinti = new YerlesimAyrinti[0];
                 }
+                return Ok(Response);
             } 
         }   
     }
