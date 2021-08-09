@@ -3,24 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using trenRezervasyonSistemi.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace trenRezervasyonSistemi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class trenController : Controller
+
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+
+        [HttpGet]
+        public string  Get()
         {
-            return View();
+            return "test";
         }
 
-        // POST api/values
+        // POST 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] RezervasyonRequest request)
+
         {
-            //vagon dolu mu değil mi
+            
+           if (request.rezervasyonYapılabilir == false) {
+               //yerleşim yeri boş array
+            };
+           var response = new RezervasyonResponse
+           {
+               rezervasyonYapılabilir = true,
+               yerlesimAyrinti = new YerlesimAyrinti[] {
+                    new YerlesimAyrinti {
+                   VagonAdi= "vagon1",
+                   KisiSayisi = 5
+               }
+               }
+           };
+            return Ok(response);
         }
         
     }
