@@ -20,28 +20,28 @@ namespace trenRezervasyonSistemi.Controllers
         {
             return "test";
         }
-
         // POST 
         [HttpPost]
         public IActionResult Post([FromBody] RezervasyonRequest request)
-
         {
-            
-           if (request.rezervasyonYapılabilir == false) {
-               //yerleşim yeri boş array
-            };
-           var response = new RezervasyonResponse
+            if (request.rezervasyonYapılabilir == true){
+                 var response = new RezervasyonResponse
            {
                rezervasyonYapılabilir = true,
                yerlesimAyrinti = new YerlesimAyrinti[] {
                     new YerlesimAyrinti {
                    VagonAdi= "vagon1",
                    KisiSayisi = 5
-               }
-               }
-           };
-            return Ok(response);
-        }
-        
+                                        }
+                                                    }                    
+                     };
+                                 return Ok(response);
+            }
+            else
+                {
+                var yerlesimAyrinti = new YerlesimAyrinti[0];
+                }
+            } 
+        }   
     }
-}
+
