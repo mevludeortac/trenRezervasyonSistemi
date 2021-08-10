@@ -16,7 +16,7 @@ namespace trenRezervasyonSistemi.Controllers
     {
 
         [HttpGet]
-        public string  Get()
+        public string Get()
         {
             return "test";
         }
@@ -24,24 +24,46 @@ namespace trenRezervasyonSistemi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] RezervasyonRequest request)
         {
-            if (request.rezervasyonYapılabilir == true){
-                 var response = new RezervasyonResponse
-           {
-               rezervasyonYapılabilir = true,
-               yerlesimAyrinti = new YerlesimAyrinti[] {
-                    new YerlesimAyrinti {
-                   VagonAdi= "vagon1",
-                   KisiSayisi = 5
-                                        }
-                                                    }                    
-                     };
+            var kisiSayisi = request.RezervasyonYapilacakKisiSayisi;
+            var farkliVagonlaraYerlestir = request.KisilerFarkliVagonlaraYerlestirilebilir;
+            var vagonlar = request.Tren.Vagonlar;
+
+            vagonlar = vagonlar.Where(vagon => vagon.DoluKoltukAdet < (vagon.Kapasite * 0.7) ).ToArray();
+            //5.maddenin koşulları
+            List<YerlesimAyrinti> yerlesimAyrinti = new List<YerlesimAyrinti>();
+            foreach (var vagon in vagonlar)
+            {
+                yerlesimAyrinti.Add(new YerlesimAyrinti {
+                    VagonAdi= vagon.Ad,
+                    KisiSayisi = kisiSayisi
+                });
             }
-            else
+            
+            var response = new RezervasyonResponse
+            {
+                rezervasyonYapılabilir = true,
+                yerlesimAyrinti = yerlesimAyrinti.ToArray()
+            };
+
+            return Ok(response);
+            
+          
+               /*  var response = new RezervasyonResponse
                 {
-                var yerlesimAyrinti = new YerlesimAyrinti[0];
-                }
-                return Ok(Response);
-            } 
-        }   
+                    rezervasyonYapılabilir = true,
+                    yerlesimAyrinti = new YerlesimAyrinti[] {
+                        new YerlesimAyrinti {
+                            VagonAdi= "vagon1",
+                            KisiSayisi = 5
+                        }
+                    }
+                };
+                return Ok(response); */
+            
+            
+        }
     }
+
+
+}
 

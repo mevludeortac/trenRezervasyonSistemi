@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace trenRezervasyonSistemi.Models
 {
-    public class tren
+    public class Tren
     {
-        public string ad { get; set; }
-        public virtual ICollection<vagon> vagonlar { get; set; }
+        public string Ad { get; set; }
+        public virtual ICollection<Vagon> Vagonlar { get; set; }
     }
 }

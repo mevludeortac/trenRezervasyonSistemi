@@ -1,14 +1,12 @@
 ﻿using System;
 namespace trenRezervasyonSistemi.Models
 {
-    public class vagon
+    public class Vagon
     {
        
-        public string ad { get; set; }
-        public double kapasite { get; set; }
-        public Int64 doluKoltukAdedi { get; set; }
-        public int trenId { get; set; }
-        public virtual tren Tren { get; set; }
+        public string Ad { get; set; }
+        public double Kapasite { get; set; }
+        public Int64 DoluKoltukAdet { get; set; }
 
     }
 }
