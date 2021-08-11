@@ -46,21 +46,6 @@ namespace trenRezervasyonSistemi.Controllers
             };
 
             return Ok(response);
-            
-          
-               /*  var response = new RezervasyonResponse
-                {
-                    rezervasyonYapılabilir = true,
-                    yerlesimAyrinti = new YerlesimAyrinti[] {
-                        new YerlesimAyrinti {
-                            VagonAdi= "vagon1",
-                            KisiSayisi = 5
-                        }
-                    }
-                };
-                return Ok(response); */
-            
-            
         }
     }
 
